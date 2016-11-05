@@ -1,0 +1,22 @@
+{
+  "name": "@jstoebel/timestamp",
+  "version": "1.0.0",
+  "description": "a timestamp microservice for freecodecamp.com",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jstoebel/timestamp.git"
+  },
+  "author": "Jacob Stoebel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jstoebel/timestamp/issues"
+  },
+  "homepage": "https://github.com/jstoebel/timestamp#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
