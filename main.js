@@ -36,4 +36,4 @@ app.get('/:timestamp', function(req, res) {
   res.end(JSON.stringify(obj))
 
 })
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
