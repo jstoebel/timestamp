@@ -1,30 +1,39 @@
 var express = require('express')
+var path = require('path')
+var jade = require('jade')
+var moment = require('moment')
+
 var app = express()
+app.get("/", function(req, res){
+  app.set('views', "views")
+  app.set('view engine', 'jade')
+  res.render('main', {date: new Date().toDateString()})
+})
 
 app.get('/:timestamp', function(req, res) {
 
-  var monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-  var d = new Date(Number(req.params.timestamp))
 
-  var unixTime = d.getTime()
-  if (isNaN(unixTime)){
-    // invalid date!
-    var obj = {
-      "unix": null,
-      "natural": null
-    }
+  if (isNaN(req.params.timestamp)){
+    // try to parse as natural language
+    d = moment(req.params.timestamp)
   } else {
-    // valid date
-    //  (example: January 1, 2016)
+    // try to parse a unix time
+    d = moment(Number(req.params.timestamp))
+  }
+
+  if (d == "Invalid date"){
     var obj = {
-      "unix": unixTime,
-      "natural": `${monthNames[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
-    }
+        "unix": null,
+        "natural": null
+      }
+  } else {
+    var obj = {
+        "unix": d.unix(),
+        "natural": d.format('MMMM Do YYYY')
+      }
   }
 
   res.end(JSON.stringify(obj))
-  // res.end('Hello World!')
+
 })
 app.listen(3000)
